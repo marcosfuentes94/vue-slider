@@ -1,61 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Slider</title>
-    <link rel="stylesheet" href="./css/style.css" />
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slider</title>
+            <!-- FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+            <!-- FONTAWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+            <!-- CSS -->
+<link rel="stylesheet" href="css/style.css">
+
+            <!-- VUEJS -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+            <!-- JAVASCRIPT -->
+<script defer src="js/script.js"></script>
+
 </head>
-
 <body>
+        <!-- CONTAINER -->
+    <div id="app" class="container">
+    <!-- CAROUSEL -->
+    <div id="carousel">
 
-    <div id="app">
-
-        <div class="container">
-            <div class="slider-wrapper" tabindex="0">
-
-                <div class="item">
-                    <img src="img/01.webp" alt="Spiderman" />
-                    <div class="text">
-                        <h3>Spiderman</h3>
-                        <p>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit
-                            tempore aliquid deleniti aut
-                            veniam inventore eligendi ex ad ullam, cumque provident totam omnis, magnam dolores dolorum
-                            corporis.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="thumbs">
-                    <div class="prev"></div>
-                    <div class="next"></div>
-                    <div class="thumb active">
-                        <img src="img/01.webp" alt="Svezia" />
-                    </div>
-                    <div class="thumb">
-                        <img src="img/02.webp" alt="Ratchet & Clank" />
-                    </div>
-                    <div class="thumb">
-                        <img src="img/03.webp" alt="Fortnite" />
-                    </div>
-                    <div class="thumb">
-                        <img src="img/04.webp" alt="Stray" />
-                    </div>
-                    <div class="thumb">
-                        <img src="img/05.webp" alt="Avengers" />
-                    </div>
-                </div>
-
-            </div>
+        <!-- LEFT ARROW -->
+        <i class=" arrow fa-solid fa-circle-arrow-left" id="previous" 
+        @click="goToPrevious"
+        @mouseenter="stopAutoplay"
+        @mouseleave="startAutoplay">
+        </i>
+        
+        <!-- GALLERY -->
+        <div class="gallery">
+            <!-- FIGURE -->
+            <figure v-for="(picture, i) in images" v-show="currentIndex === i ">
+                <!-- IMAGE -->
+                <img  :src="picture.image"  alt="figures 1" >
+                <!-- FIGCAPTION -->
+                <figcaption>
+                    <!-- TITLE -->
+                    <h2>{{picture.title}}</h2>
+                    <!-- TEXT -->
+                    <p>{{picture.text}}</p>
+                </figcaption>
+            </figure>
         </div>
 
+        <!-- RIGHT ARROW -->
+        <i class=" arrow fa-solid fa-circle-arrow-right" id="next" 
+        @click="goToNext"
+        @mouseenter="stopAutoplay"
+        @mouseleave="startAutoplay"></i>
     </div>
 
-    <script src='https://unpkg.com/vue@3/dist/vue.global.js'></script>
-    <script src="./js/script.js"></script>
+         <!-- THUMBNAILS -->
+        <div id="thumbnails">
+            
+        <!-- IMAGE -->
+        <img v-for="(picture, i) in images" 
+        :src="picture.image" 
+        alt="figures 1"  
+        :class="{active : currentIndex === i}"
+        @click="setCurrentIndex(i)"
+        @mouseenter="stopAutoplay"
+        @mouseleave="startAutoplay">
+    </div>
+</div>
 </body>
-
 </html>
