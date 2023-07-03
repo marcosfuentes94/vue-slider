@@ -67,7 +67,19 @@ goToPrevious() {
 setCurrentIndex(targetIndex) {
     this.currentIndex = targetIndex;
 },
-
+// METODO PER FERMARE L'AUTOPLAY
+stopAutoplay() {
+    clearInterval(this.autoplay);
+},
+// METODO PER AVVIARE L'AUTOPLAY
+startAutoplay() {
+    this.autoplay = setInterval(this.goToNext, 3000);
+}
+},
+// METODO MOUNTED CHE SI ATTIVA ALL'AVVIO DELLA PAGINA
+mounted() {
+// AVVIA L'AUTOPLAY
+this.startAutoplay();
 }
 });
 
